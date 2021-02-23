@@ -23,6 +23,7 @@
 # THE SOFTWARE.
 
 import utime as time
+from Eduponics import mcp23017
 
 _REGISTER_CONVERT = const(0x00)
 _REGISTER_CONFIG = const(0x01)
@@ -113,11 +114,21 @@ _RATES = (
 
 
 class ADS1115:
-    def __init__(self, i2c, address=0x48, gain=1):
+    def __init__(self, i2c, ads_address=0x48, gain=1, mcp_address=0x20):
         self.i2c = i2c
         self.address = address
+        self.mcp_address = mcp_address
         self.gain = gain
         self.temp2 = bytearray(2)
+        # define MCP for activating MOSFET pins
+        mcp = mcp23017.MCP23017(self.i2c, mcp_address)
+        # define all the pins for the mosfets
+        self.mcp_pins_sheet = {
+            0:8,
+            1:9,
+            2:10,
+            3:11
+        }
 
     def _write_register(self, register, value):
         self.temp2[0] = value >> 8
@@ -184,6 +195,12 @@ class ADS1115:
         return res if res < 32768 else res - 65536
 
     def read(self,pin):
+        # activate the mosfet
+        self.mcp.pin(self.mcp_pins_sheet[pin], mode=0, value=0)
+        time.sleep(0.1)
+        # read the data
         raw = self.read_raw(channel1=pin)
         voltage = self.raw_to_v(raw)
+        # deactivate mosfet after use
+        self.mcp.pin(self.mcp_pins_sheet[pin], mode=0, value=0)
         return {"raw":raw,"voltage":voltage}
