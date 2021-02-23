@@ -1,2 +1,3 @@
 Eduponics/__pycache__/*
 dist/*
+micropython_eduponics.egg-info/*

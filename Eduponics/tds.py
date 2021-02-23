@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 import time
 from Eduponics import ads1x15
-from ulab import *
+from ulab import array,numerical
 from machine import I2C, Pin
 import time
 
@@ -72,7 +72,7 @@ class TDS():
             buffer = [value1,value2]
             self.overwrite_buffer(buffer)
             # turn the list into numpy array
-            double_buffer = numpy.array(self.values_buffer)
+            double_buffer = array(self.values_buffer)
             # run median_filter on the numpy array
             median_voltage = self.median_filter(double_buffer) * self.vref / 1024.0;
             # calculate voltage based on temperature compensation
@@ -85,4 +85,4 @@ class TDS():
             return 0
 
     def median_filter(self, data):
-        return numpy.mean(data)
+        return numerical.mean(data)
