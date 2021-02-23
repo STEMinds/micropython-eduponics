@@ -6,7 +6,7 @@ The official MicroPython Eduponics library for Eduponics Mini ESP32 dev board.
 
 First, connect the ESP32 board to the WiFi by creating boot.py file and writing the following:
 
-'''
+```python
 import network
 import esp
 esp.osdebug(None)
@@ -25,14 +25,14 @@ while station.isconnected() == False:
   pass
 
 print('Connected to WiFi successfully, IP: %s' % station.ifconfig()[0])
-'''
+```
 
 Make sure to change WiFi ESSID and Password. Once the ESP32 is connected to the Wifi, run the following commands:
 
-'''
+```python
 import upip
 upip.install("micropython-eduponics")
-'''
+```
 
 This will install the latest version of micropython-eduponics package through upip.
 
