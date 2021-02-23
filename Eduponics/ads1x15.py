@@ -202,5 +202,5 @@ class ADS1115:
         raw = self.read_raw(channel1=pin)
         voltage = self.raw_to_v(raw)
         # deactivate mosfet after use
-        self.mcp.pin(self.mcp_pins_sheet[pin], mode=0, value=0)
+        self.mcp.pin(self.mcp_pins_sheet[pin], mode=0, value=1)
         return {"raw":raw,"voltage":voltage}
