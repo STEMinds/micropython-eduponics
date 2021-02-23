@@ -114,14 +114,14 @@ _RATES = (
 
 
 class ADS1115:
-    def __init__(self, i2c, ads_address=0x48, gain=1, mcp_address=0x20):
+    def __init__(self, i2c, address=0x48, gain=1, mcp_address=0x20):
         self.i2c = i2c
         self.address = address
         self.mcp_address = mcp_address
         self.gain = gain
         self.temp2 = bytearray(2)
         # define MCP for activating MOSFET pins
-        mcp = mcp23017.MCP23017(self.i2c, mcp_address)
+        mcp = mcp23017.MCP23017(self.i2c, address=mcp_address)
         # define all the pins for the mosfets
         self.mcp_pins_sheet = {
             0:8,
