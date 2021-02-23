@@ -32,6 +32,7 @@ import time
 class TDS():
 
     def __init__(self, channel=0, temperature=25, i2c=None, mcp_address=0x20, ads_address=0x49):
+        self.i2c = i2c
         self.channel = channel
         self.kvalue = 1.0
         self.temperature = temperature
@@ -42,7 +43,7 @@ class TDS():
         self.ads_address = ads_address
         self.mcp_address = mcp_address
         self.gain = 1
-        self.adc = ads1x15.ADS1115(i2c, address=self.ads_address, mcp_address=self.mcp_address, self.gain)
+        self.adc = ads1x15.ADS1115(i2c=self.i2c, address=self.ads_address, mcp_address=self.mcp_address, gain=self.gain)
 
     def overwrite_buffer(self, item):
         self.values_buffer.insert(0, item)

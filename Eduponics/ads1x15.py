@@ -121,7 +121,7 @@ class ADS1115:
         self.gain = gain
         self.temp2 = bytearray(2)
         # define MCP for activating MOSFET pins
-        mcp = mcp23017.MCP23017(self.i2c, address=mcp_address)
+        mcp = mcp23017.MCP23017(i2c=self.i2c, address=mcp_address)
         # define all the pins for the mosfets
         self.mcp_pins_sheet = {
             0:8,
