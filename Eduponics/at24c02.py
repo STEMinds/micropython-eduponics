@@ -55,9 +55,3 @@ class AT24C32N(object):
         for i in range(partial, len(buf), self.bpp):
             self.i2c.writeto_mem(self.i2c_addr, addr+i-partial, buf[i:i+self.bpp], addrsize=16)
             time.sleep_ms(5)
-
-i2c = machine.I2C(scl=machine.Pin(15), sda=machine.Pin(4))
-eeprom = AT24C32N(i2c)
-print(eeprom.read(0, 32))
-eeprom.write(0, 'hello world')
-print(eeprom.read(0, 11))
