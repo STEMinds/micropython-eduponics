@@ -15,7 +15,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     version=__version__,
-    download_url = 'https://github.com/STEMinds/micropython-eduponics/archive/1.0.0.tar.gz',
+    download_url = 'https://github.com/STEMinds/micropython-eduponics/archive/1.0.1.tar.gz',
     keywords = ['micropython','upython', 'eduponics-mini', 'esp32', 'ADS1x15', 'MCP23017'],
     description='',
     long_description='',
