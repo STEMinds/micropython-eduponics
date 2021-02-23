@@ -1,3 +1,11 @@
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=STEMinds_micropython-eduponics&metric=bugs)](https://sonarcloud.io/dashboard?id=STEMinds_micropython-eduponics)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=STEMinds_micropython-eduponics&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=STEMinds_micropython-eduponics)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=STEMinds_micropython-eduponics&metric=ncloc)](https://sonarcloud.io/dashboard?id=STEMinds_micropython-eduponics)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=STEMinds_micropython-eduponics&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=STEMinds_micropython-eduponics)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=STEMinds_micropython-eduponics&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=STEMinds_micropython-eduponics)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=STEMinds_micropython-eduponics&metric=security_rating)](https://sonarcloud.io/dashboard?id=STEMinds_micropython-eduponics)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=STEMinds_micropython-eduponics&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=STEMinds_micropython-eduponics)
+
 # MicroPython-Eduponics
 
 The official MicroPython Eduponics library for Eduponics Mini ESP32 dev board.
