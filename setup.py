@@ -7,7 +7,7 @@ from setuptools.command.test import test as TestCommand
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),'eduponics')))
 
-from Eduponics import __version__
+from eduponics import __version__
 sys.path.pop(0)
 
 setup(
