@@ -196,11 +196,11 @@ class ADS1115:
 
     def read(self,pin):
         # activate the mosfet
-        self.mcp.pin(self.mcp_pins_sheet[pin], mode=0, value=0)
+        self.mcp.pin(self.mcp_pins_sheet[pin], mode=0, value=1)
         time.sleep(0.1)
         # read the data
         raw = self.read_raw(channel1=pin)
         voltage = self.raw_to_v(raw)
         # deactivate mosfet after use
-        self.mcp.pin(self.mcp_pins_sheet[pin], mode=0, value=1)
+        self.mcp.pin(self.mcp_pins_sheet[pin], mode=0, value=0)
         return {"raw":raw,"voltage":voltage}
