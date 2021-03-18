@@ -15,18 +15,22 @@ The official MicroPython Eduponics library for Eduponics Mini ESP32 dev board.
 This library allows you to control all the functionalities of the ESP32 Eduponics mini dev board from one place.
 The classes that are currently supported are:
 
+- umqttsimple.py - implementation of simple MQTT protocol for MicroPython.
 - ads1x15.py - ADS1x15 precide Analog-to-digital chip (available on extension board).
 - at24c02.py - AT24C02 EEPROM module.
 - bh1750.py - BH1750 photodiode (light sensor).
 - bme280.py - 3 in 1: temperature, humidity and barometric sensor.
 - ds1307.py - DS1307 RTC module.
-- mcp23017.py - MCP23017 IO Expander (available on extension board).
+- mcp23017.py - MCP23017 16-bit IO Expander (available on extension board).
+- pcf8574.py - PCF8574 8-bit IO Expander (available on valve extension board).
 - tds.py - To control TDS sensor through extension board.
 
 The ADS1x15 class is integrated with MCP23017 in order to control the on-board MOSFET's and allow super low power consumption.
 When the program ask for data form the ADC the MOSFET will open allowing current to flow (which will activate the sensor) once probing is done, the MOSFET will be deactivated.
 
 This approach also allows to control multiple sensors such as: pH, EC, TDS etc .. without conflict! also extending the sensors lifespan.
+
+The MCP23017 class also contains code to control the valve which can be found on the Eduponics Mini extension board.
 
 ## How to install
 
@@ -73,7 +77,7 @@ Copyright (c) 2014 Adafruit Industries,
               2016 Paul Cunnane 2016,
               2016 Peter Dahlebrg,
               2017 Robert Hammelrath (@robert-hh),
-              2019 Mike Causer,
+              2019 Mike Causer (@mcauser),
               2021 STEMinds (@STEMinds),
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
