@@ -31,18 +31,29 @@ import time
 
 class TDS():
 
-    def __init__(self, channel=0, temperature=25, i2c=None, mcp_address=0x20, ads_address=0x49):
+    def __init__(self, channel=0, temperature=25, i2c=None, mcp_address=0x20, ads_address=0x49, scount=30, gain=1):
+
+        # table of gains, used to get vref
+        _GAINS_V = {
+            "2/3":6.144,  # 2/3x
+            "1":4.096,  # 1x
+            "2":2.048,  # 2x
+            "4":1.024,  # 4x
+            "8":0.512,  # 8x
+            "16":0.256  # 16x
+        }
+
         self.i2c = i2c
         self.channel = channel
         self.kvalue = 1.0
         self.temperature = temperature
         self.values_buffer = [] # empty list of values for median average
-        self.scount = 30 # how many times to take samples to make median average
-        self.vref = 4.096 # analog reference voltage(Volt) of the ADC, based on ADS chip gain 1
+        self.scount = scount # how many times to take samples to make median average
+        self.gain = gain
+        self.vref = _GAINS_V[str(gain)]
         # Open i2c bus
         self.ads_address = ads_address
         self.mcp_address = mcp_address
-        self.gain = 1
         self.adc = ads1x15.ADS1115(i2c=self.i2c, address=self.ads_address, mcp_address=self.mcp_address, gain=self.gain)
 
     def overwrite_buffer(self, item):
