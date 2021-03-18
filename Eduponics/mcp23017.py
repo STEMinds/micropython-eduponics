@@ -401,3 +401,39 @@ class VirtualPin():
         self._port.mode = self._flip_bit(self._port.mode, 0) # mode = output
         if val is not None:
             self._port.gpio = self._flip_bit(self._port.gpio, val & 1)
+
+class Relays():
+
+    def __init__(self, i2c, address=0x20):
+
+        self.i2c = i2c
+        self.address = address
+        self.mcp = MCP23017(self.i2c, self.address)
+
+        # set pins to low, close the relays
+        self.mcp.pin(0, mode=0, value=0)
+        self.mcp.pin(1, mode=0, value=0)
+        self.mcp.pin(2, mode=0, value=0)
+        self.mcp.pin(3, mode=0, value=0)
+
+    def open(self,pin):
+        # open relay by pin number 0-3
+        self.mcp[pin].output(1)
+
+    def close(self,pin):
+        # close relay by pin number 0-3
+        self.mcp[pin].output(0)
+
+    def open_all(self):
+        # open all relays
+        self.mcp[0].output(1)
+        self.mcp[1].output(1)
+        self.mcp[2].output(1)
+        self.mcp[3].output(1)
+
+    def close_all(self):
+        # close all relays
+        self.mcp[0].output(0)
+        self.mcp[1].output(0)
+        self.mcp[2].output(0)
+        self.mcp[3].output(0)
