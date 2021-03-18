@@ -19,7 +19,7 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #THE SOFTWARE.
 
-from eduponics import ads1x15,tds
+from eduponics import mcp23017
 from machine import I2C, Pin
 import time
 
@@ -31,16 +31,26 @@ power.value(1)
 # make sure to wait enough time for the board to wakeup
 time.sleep(0.1)
 
-# setup I2C
+# define i2c connection to the extension board
 i2c = I2C(scl=Pin(33), sda=Pin(32))
 
-# intialize the TDS sensor
-tds = tds.TDS(i2c=i2c,channel=0)
+# initialize relay object
+relays = mcp23017.Relays(i2c, address=0x20)
 
-# while true, keep checking value
-while True:
-    # NOTE: the mosfet will turn on and off after testing from ADS chip
-    # it's suggested to wait 0.5-1 seconds or more between testing data
-    # frequent mosfet openening and closing might shorten it's lifespan.
-    print("TDS: %s" % tds.read())
-    time.sleep(0.5)
+# open relays one by one
+for i in range(0,4):
+    relays.open(i)
+    time.sleep(1)
+
+# close all relays one by one
+for i in range(0,4):
+    relays.close(i)
+    time.sleep(1)
+
+# open all relays
+relays.open_all()
+
+time.sleep(3)
+
+# close all relays
+relays.close_all()
