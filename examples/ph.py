@@ -44,6 +44,8 @@ import time
 power = Pin(12, Pin.OUT)
 # activate the board
 power.value(1)
+# wait 100ms to make sure the MOSFET power is on
+time.sleep(0.1)
 
 # setup I2C
 i2c = I2C(scl=Pin(33), sda=Pin(32))
