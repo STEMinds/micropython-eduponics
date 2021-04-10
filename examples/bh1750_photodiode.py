@@ -1,8 +1,8 @@
 """
 MicroPython BH1750 light sensor module
-https://github.com/STEMinds/eduponics-mini
+https://github.com/STEMinds/micropython-eduponics
 MIT License
-Copyright (c) 2020 STEMinds
+Copyright (c) 2021 STEMinds
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from eduponics import bh1750
+from Eduponics import bh1750
 import machine
 import time
 

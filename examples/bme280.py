@@ -1,8 +1,8 @@
 """
 MicroPython BME280 temperature, humidity and air-pressure sensor
-https://github.com/STEMinds/eduponics-mini
+https://github.com/STEMinds/micropython-eduponics
 MIT License
-Copyright (c) 2020 STEMinds
+Copyright (c) 2021 STEMinds
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@ SOFTWARE.
 """
 
 from machine import I2C,Pin
-from eduponics import bme280
+from Eduponics import bme280
 from utime import sleep
 
 # setup I2C connection

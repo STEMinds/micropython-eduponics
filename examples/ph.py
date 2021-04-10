@@ -1,5 +1,5 @@
 '''
-https://github.com/STEMinds/Eduponics-Mini
+https://github.com/STEMinds/micropython-eduponics
 MIT License
 Copyright (c) 2020 STEMinds
 
@@ -36,7 +36,7 @@ Ph Buffer table:
 ----------------------------------------------------------------------------------------------------
 '''
 
-from eduponics import ads1x15,mcp23017
+from Eduponics import ads1x15,mcp23017
 from machine import I2C, Pin
 import time
 

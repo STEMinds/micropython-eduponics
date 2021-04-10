@@ -19,7 +19,7 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #THE SOFTWARE.
 
-from eduponics import mcp23017
+from Eduponics import mcp23017
 from machine import I2C, Pin
 import time
 

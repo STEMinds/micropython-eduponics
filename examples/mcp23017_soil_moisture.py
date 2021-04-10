@@ -1,5 +1,5 @@
 """
-MicroPython Eduponics mini soil moisture sensor - demo
+MicroPython BMCP23017 Eduponics mini extension board - Soil moisture demo
 https://github.com/STEMinds/micropython-eduponics
 MIT License
 Copyright (c) 2021 STEMinds
@@ -22,7 +22,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from machine import ADC,Pin
+from Eduponics import mcp23017,ads1x15
+from machine import I2C, Pin
+import time
+
+# IO12 reserved for powering the board, define it
+power = Pin(12, Pin.OUT)
+# activate the board
+power.value(1)
+
+# make sure to wait enough time for the board to wakeup
+time.sleep(0.1)
+
+# define i2c connection to the extension board
+i2c = I2C(scl=Pin(33), sda=Pin(32))
+
+# setup adc for the extension board
+ads_address = 0x48
+mcp_address = 0x20
+gain = 1
+
+adc = ads1x15.ADS1115(i2c=i2c, address=ads_address,mcp_address=mcp_address, gain=gain)
 
 # set max val and min val of the sensor
 # this requires manual calibration
@@ -41,14 +61,10 @@ def value_in_percentage(val):
     # for this example we'll return only the normal reading
     return normal_reading
 
-# set adc (analog to digital) on pin 35
-adc = ADC(Pin(35))
-# read analog input
-adc.read()
-# set 11dB input attenuation (voltage range roughly 0.0v - 3.6v)
-adc.atten(ADC.ATTN_11DB)
+# get voltage
+adc_read = adc.read(0)
 # get sensor value
-value = adc.read()
+value = adc_read["raw"]
 # print the analog results (moisture)
 print("sensor value: %s" % value)
 print("sensor value in percentage: %s" % value_in_percentage(value))

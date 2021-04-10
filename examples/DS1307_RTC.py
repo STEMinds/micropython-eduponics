@@ -1,8 +1,8 @@
 """
 MicroPython DS1307 RTC module
-https://github.com/STEMinds/eduponics-mini
+https://github.com/STEMinds/micropython-eduponics
 MIT License
-Copyright (c) 2020 STEMinds
+Copyright (c) 2021 STEMinds
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@ SOFTWARE.
 """
 
 import machine
-from eduponics import ds1307
+from Eduponics import ds1307
 import time
 
 # configure i2c pin
