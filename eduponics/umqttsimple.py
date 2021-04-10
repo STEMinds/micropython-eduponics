@@ -8,8 +8,8 @@ class MQTTException(Exception):
 
 class MQTTClient:
 
-    def __init__(self, client_id=hexlify(machine.unique_id()), server="mqtt.eclipse.org", port=0, user=None, password=None, keepalive=0,
-                 ssl=False, ssl_params={}):
+    def __init__(self, client_id=hexlify(machine.unique_id()), server="mqtt.eclipseprojects.io", port=0, user=None, password=None, keepalive=0,
+                 ssl=True, ssl_params={}):
         if port == 0:
             port = 8883 if ssl else 1883
         self.client_id = client_id
