@@ -21,8 +21,8 @@ SOFTWARE.
 """
 
 class Valve:
-    
-    def __init__(self, i2c, address=0x20):
+
+    def __init__(self, i2c, address=0x27):
         self._i2c = i2c
         self._address = address
         self._port = bytearray(1)
