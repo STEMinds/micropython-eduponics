@@ -17,11 +17,11 @@ The classes that are currently supported are:
 
 - umqttsimple.py - implementation of simple MQTT protocol for MicroPython.
 - ads1x15.py - ADS1x15 precide Analog-to-digital chip (available on extension board).
+- mcp23017.py - MCP23017 16-bit IO Expander (available on extension board).
 - at24c02.py - AT24C02 EEPROM module.
 - bh1750.py - BH1750 photodiode (light sensor).
 - bme280.py - 3 in 1: temperature, humidity and barometric sensor.
 - ds1307.py - DS1307 RTC module.
-- mcp23017.py - MCP23017 16-bit IO Expander (available on extension board).
 - pcf8574.py - PCF8574 8-bit IO Expander (available on valve extension board).
 - tds.py - To control TDS sensor through extension board.
 
