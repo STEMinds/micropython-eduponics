@@ -1,5 +1,5 @@
 """
-MicroPython BMCP23017 Eduponics mini extension board - Soil moisture demo
+MicroPython MCP23017 Eduponics mini extension board - Soil moisture demo
 https://github.com/STEMinds/micropython-eduponics
 MIT License
 Copyright (c) 2021 STEMinds

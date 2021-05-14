@@ -1,5 +1,5 @@
 """
-MicroPython MCP23017 Eduponics mini extension board - Relays demo
+MicroPython water indication with RGB NeoPixel Example
 https://github.com/STEMinds/micropython-eduponics
 MIT License
 Copyright (c) 2021 STEMinds
@@ -22,38 +22,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from Eduponics import mcp23017
-from machine import I2C, Pin
+import machine, neopixel
 import time
 
-# IO12 reserved for powering the board, define it
-power = Pin(12, Pin.OUT)
-# activate the board
-power.value(1)
+# define water level sensor as INPUT on IO pin number 21
+water_level = machine.Pin(21, machine.Pin.IN)
+# Configure the RGB LED at IO pin 14 (1 indicates 1 LED)
+np = neopixel.NeoPixel(machine.Pin(14), 1)
 
-# make sure to wait enough time for the board to wakeup
-time.sleep(0.1)
+def is_empty():
+    # will return 0 if container have no water and 1 if it has water
+    return water_level.value()
 
-# define i2c connection to the extension board
-i2c = I2C(scl=Pin(33), sda=Pin(32))
-
-# initialize relay object
-relays = mcp23017.Relays(i2c, address=0x20)
-
-# open relays one by one
-for i in range(0,4):
-    relays.open(i)
-    time.sleep(1)
-
-# close all relays one by one
-for i in range(0,4):
-    relays.close(i)
-    time.sleep(1)
-
-# open all relays
-relays.open_all()
-
-time.sleep(3)
-
-# close all relays
-relays.close_all()
+try:
+    while True:
+        if(is_empty()):
+            print("[-] You don't have water in the container")
+            np[0] = (255, 0, 0) # set to red, full brightness
+        else:
+            print("[-] The water container has sufficient amount of water")
+            np[0] = (0, 255, 0) # set to green, full brightness
+        # save changes
+        np.write() # save changes
+        # wait one second before checking again
+        time.sleep(1)
+except KeyboardInterrupt:
+    # keyboard interrupt, let's turn off LED
+    np[0] = (0, 0, 0)
+    np.write()

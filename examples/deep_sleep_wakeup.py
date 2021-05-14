@@ -1,5 +1,5 @@
 """
-MicroPython MCP23017 Eduponics mini extension board - Relays demo
+MicroPython deep sleep wakeup by button example
 https://github.com/STEMinds/micropython-eduponics
 MIT License
 Copyright (c) 2021 STEMinds
@@ -22,38 +22,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from Eduponics import mcp23017
-from machine import I2C, Pin
+import machine
+import esp32
 import time
 
-# IO12 reserved for powering the board, define it
-power = Pin(12, Pin.OUT)
-# activate the board
-power.value(1)
+wake_up = machine.Pin(36, mode = machine.Pin.IN)
 
-# make sure to wait enough time for the board to wakeup
-time.sleep(0.1)
+#level parameter can be: esp32.WAKEUP_ANY_HIGH or esp32.WAKEUP_ALL_LOW
+esp32.wake_on_ext0(pin = wake_up, level = esp32.WAKEUP_ANY_HIGH)
 
-# define i2c connection to the extension board
-i2c = I2C(scl=Pin(33), sda=Pin(32))
+#your main code goes here to perform a task
 
-# initialize relay object
-relays = mcp23017.Relays(i2c, address=0x20)
-
-# open relays one by one
-for i in range(0,4):
-    relays.open(i)
-    time.sleep(1)
-
-# close all relays one by one
-for i in range(0,4):
-    relays.close(i)
-    time.sleep(1)
-
-# open all relays
-relays.open_all()
-
-time.sleep(3)
-
-# close all relays
-relays.close_all()
+print('Im awake now. Going to sleep in 5 seconds ...')
+time.sleep(5)
+print('Going to sleep now ..')
+machine.deepsleep()

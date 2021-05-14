@@ -1,5 +1,5 @@
 """
-MicroPython MCP23017 Eduponics mini extension board - Relays demo
+MicroPython Eduponics mini BH1750 light sensor - demo
 https://github.com/STEMinds/micropython-eduponics
 MIT License
 Copyright (c) 2021 STEMinds
@@ -21,39 +21,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-
-from Eduponics import mcp23017
-from machine import I2C, Pin
+from Eduponics import bh1750
 import time
 
-# IO12 reserved for powering the board, define it
-power = Pin(12, Pin.OUT)
-# activate the board
-power.value(1)
+# initialize the bh1750 sensor
+light = bh1750.BH1750()
 
-# make sure to wait enough time for the board to wakeup
-time.sleep(0.1)
-
-# define i2c connection to the extension board
-i2c = I2C(scl=Pin(33), sda=Pin(32))
-
-# initialize relay object
-relays = mcp23017.Relays(i2c, address=0x20)
-
-# open relays one by one
-for i in range(0,4):
-    relays.open(i)
+# while true, print the light values in lux
+while True:
+    print(light.readLight())
     time.sleep(1)
-
-# close all relays one by one
-for i in range(0,4):
-    relays.close(i)
-    time.sleep(1)
-
-# open all relays
-relays.open_all()
-
-time.sleep(3)
-
-# close all relays
-relays.close_all()

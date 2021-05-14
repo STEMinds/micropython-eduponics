@@ -1,4 +1,5 @@
 '''
+MicroPython pH sensor Eduponics mini - demo
 https://github.com/STEMinds/micropython-eduponics
 MIT License
 Copyright (c) 2020 STEMinds

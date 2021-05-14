@@ -1,5 +1,5 @@
 """
-MicroPython MCP23017 Eduponics mini extension board - Relays demo
+MicroPython Eduponics mini water activated pump - demo
 https://github.com/STEMinds/micropython-eduponics
 MIT License
 Copyright (c) 2021 STEMinds
@@ -22,38 +22,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from Eduponics import mcp23017
-from machine import I2C, Pin
+import machine
+import esp32
 import time
 
-# IO12 reserved for powering the board, define it
-power = Pin(12, Pin.OUT)
-# activate the board
-power.value(1)
+# define pump on pin IO23 as OUTPUT
+pump = machine.Pin(23, machine.Pin.OUT, machine.Pin.PULL_UP)
+# define water level sensor as INPUT on IO pin number 21
+water_level = machine.Pin(21, machine.Pin.IN)
+# define wakeup button and callback
+wake_up = machine.Pin(36, mode = machine.Pin.IN)
 
-# make sure to wait enough time for the board to wakeup
-time.sleep(0.1)
+def water_level_change(pin):
+    return 1
 
-# define i2c connection to the extension board
-i2c = I2C(scl=Pin(33), sda=Pin(32))
+def wakeup_pressed(pin):
+    # turn on the pump
+    pump.value(pin)
+    print("pressed")
 
-# initialize relay object
-relays = mcp23017.Relays(i2c, address=0x20)
-
-# open relays one by one
-for i in range(0,4):
-    relays.open(i)
-    time.sleep(1)
-
-# close all relays one by one
-for i in range(0,4):
-    relays.close(i)
-    time.sleep(1)
-
-# open all relays
-relays.open_all()
-
-time.sleep(3)
-
-# close all relays
-relays.close_all()
+# define the callbacks for the sensors
+water_level.irq(trigger=machine.Pin.IRQ_FALLING, handler=water_level_change)
+wake_up.irq(trigger=Pin.IRQ_RISING | Pin.IRQ_FALLING, handler=wakeup_pressed)
