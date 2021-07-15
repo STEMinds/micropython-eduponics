@@ -5,14 +5,12 @@ import sys
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),'Eduponics')))
-
-from eduponics import __version__
+from Eduponics import __version__
 sys.path.pop(0)
 
 # read the contents of your README file
-this_directory = os.path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+
+with open(('README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
