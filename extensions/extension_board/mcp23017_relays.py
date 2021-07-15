@@ -38,7 +38,7 @@ time.sleep(0.1)
 i2c = I2C(scl=Pin(33), sda=Pin(32))
 
 # initialize relay object
-relays = mcp23017.Relays(i2c, address=0x20)
+relays = mcp23017.Relays(i2c, address=0x27)
 
 # open relays one by one
 for i in range(0,4):

@@ -24,7 +24,7 @@ THE SOFTWARE.
 '''
 
 import time
-from eduponics import ads1x15
+from Eduponics import ads1x15
 from ulab import array,numerical
 from machine import I2C, Pin
 import time

@@ -39,22 +39,39 @@ First, connect the ESP32 board to the WiFi by creating boot.py file and writing 
 ```python
 import network
 import esp
+import time
 esp.osdebug(None)
 import gc
 gc.collect()
 
-ssid = 'WIFI_NAME'
-password = 'WIFI_PASSWORD'
+# set WiFi credentials
+ssid = ''
+password = ''
 
-station = network.WLAN(network.STA_IF)
+# check if there is username and password for wifi
+if(ssid != '' and password != ''):
 
-station.active(True)
-station.connect(ssid, password)
+    station = network.WLAN(network.STA_IF)
 
-while station.isconnected() == False:
-  pass
+    station.active(True)
+    station.connect(ssid, password)
 
-print('Connected to WiFi successfully, IP: %s' % station.ifconfig()[0])
+    timeout_interval = 10
+
+    # try to connect with timeout interval
+    for i in range(0,timeout_interval):
+        if(station.isconnected() == False):
+            time.sleep(1)
+            pass
+        else:
+            break;
+
+    if(station.isconnected()):
+        print('Connected to WiFi successfully, IP: %s' % station.ifconfig()[0])
+    else:
+        print("Something went wrong, connection timeout, try again!")
+else:
+    print("Please add WiFi credentials properly")
 ```
 
 Make sure to change WiFi ESSID and Password. Once the ESP32 is connected to the Wifi, run the following commands:
@@ -67,6 +84,27 @@ upip.install("micropython-eduponics")
 This will install the latest version of micropython-eduponics package through upip.
 
 Examples are available in the examples/ directory.
+
+## Using firmwares
+
+Alternatively, you can burn a ready made firmware which located under the repository firmwares directory
+currently 2 firmware available:
+
+1. 4M-eduponics-micropython.bin - firmware includes micropython-eduponics library pre-installed (without the MQTT client).
+2. 4M-eduponics-MQTT.bin - firmware includes the MQTT library and everything you need to get started with the Eduponics mobile app.
+
+To flash the firmware, run the following command using esptool.py
+```
+esptool.py --baud 115200 --port <port_name> write_flash 0x0 <firmware_name>.bin
+```
+Where <firmware_name> is the file name (the bin file you want to flash) and <port_name> is the port name to flash through.
+
+Current firmware version: MicroPython v1.13 on 2020-09-02; ESP32 module with ESP32
+
+## Changing MQTT broker
+
+In order to change the MQTT broker, change the umqttsimple.py file inside the [/Eduponics/](/Eduponics/umqttsimple.py) directory
+Make sure to properly mark whenever you use SSL or not.
 
 ## License
 

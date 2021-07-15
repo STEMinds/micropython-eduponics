@@ -23,7 +23,7 @@
 # THE SOFTWARE.
 
 import utime as time
-from eduponics import mcp23017
+from Eduponics import mcp23017
 
 _REGISTER_CONVERT = const(0x00)
 _REGISTER_CONFIG = const(0x01)

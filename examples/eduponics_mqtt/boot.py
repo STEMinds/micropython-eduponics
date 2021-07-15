@@ -21,23 +21,38 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-
-from umqttsimple import MQTTClient
 import network
 import esp
+import time
 esp.osdebug(None)
 import gc
 gc.collect()
 
-ssid = 'WIFI_NAME'
-password = 'WIFI_PASSWORD'
+# set WiFi credentials
+ssid = ''
+password = ''
 
-station = network.WLAN(network.STA_IF)
+# check if there is username and password for wifi
+if(ssid != '' and password != ''):
 
-station.active(True)
-station.connect(ssid, password)
+    station = network.WLAN(network.STA_IF)
 
-while station.isconnected() == False:
-  pass
+    station.active(True)
+    station.connect(ssid, password)
 
-print('Connected to WiFi successfully, IP: %s' % station.ifconfig()[0])
+    timeout_interval = 10
+
+    # try to connect with timeout interval
+    for i in range(0,timeout_interval):
+        if(station.isconnected() == False):
+            time.sleep(1)
+            pass
+        else:
+            break;
+
+    if(station.isconnected()):
+        print('Connected to WiFi successfully, IP: %s' % station.ifconfig()[0])
+    else:
+        print("Something went wrong, connection timeout, try again!")
+else:
+    print("Please add WiFi credentials properly")
