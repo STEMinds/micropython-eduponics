@@ -53,7 +53,7 @@ i2c = I2C(scl=Pin(33), sda=Pin(32))
 
 # setup adc for the extension board
 ads_address = 0x48
-mcp_address = 0x20
+mcp_address = 0x27
 gain = 1
 
 adc = ads1x15.ADS1115(i2c=i2c, address=ads_address,mcp_address=mcp_address, gain=gain)
