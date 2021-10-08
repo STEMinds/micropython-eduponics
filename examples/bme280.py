@@ -41,8 +41,8 @@ while True:
     # print the values every 1 second
     print("------------------------")
     print("Temperature: %s" % values[0])
-    print("Humidity: %s" % values[1])
-    print("Pressure: %s" % values[2])
+    print("Pressure: %s" % values[1])
+    print("Humidity: %s" % values[2])
     print("Altitude: %s" % altitude)
     print("Dew point: %s" % dew_point)
     print("Sea level: %s" % sea_level)
