@@ -59,7 +59,8 @@ def test_sht30():
     print('Temperature:', temperature, 'ºC, RH:', humidity, '%')
     
 def test_eeprom():
-    input("[-] Testing EEPROM ... press enter when ready ...")
+    print("[-] 测试 EEPROM ... 准备就绪后按 Enter ...")
+    input("[-] Testing EEPROM ... Press Enter when ready ...")
     print("")
     eeprom = at24c02.AT24C32N(i2c)
     print("[-] Reading 32 bytes ...")
@@ -72,7 +73,8 @@ def test_eeprom():
     print("")
 
 def test_dht11():
-    input("[-] Testing DHT11 sensor 5 times ... press enter when ready ...")
+    print("[-] 测试 DHT11 传感器 5 次...准备好后按 Enter ...")
+    input("[-] Testing DHT11 sensor 5 times ... Press Enter when ready ...")
     print("")
     # intialize counter
     counter = 0
@@ -93,9 +95,11 @@ def test_pcf8563():
     # set pcf8563 object
     pcf = pcf8563.PCF8563(i2c)
     # print current time
+    print("[-] 当前 RTC 时间： %s" % str(pcf.datetime()))
     print("[-] Current RTC time: %s" % str(pcf.datetime()))
     time.sleep(1)
     # clear alarm
+    print('[-] 清除报警配置寄存器')
     print('[-] Clear alarm config register')
     pcf.clear_alarm()
     # set alarm - disabled for now
@@ -104,6 +108,7 @@ def test_pcf8563():
     #print('Enable rtc chip interrupt')
     #r.enable_alarm_interrupt()
     # write time
+    print('[-] 设置当前时钟日期时间')
     print('[-] Setting current clock datetime')
     """Direct write un-none value.
     Range: seconds [0,59], minutes [0,59], hours [0,23],
@@ -112,6 +117,7 @@ def test_pcf8563():
     pcf.write_all(0,0,21,5,15,9,22)
     # set counter
     counter = 0
+    print("[-] 获取时间 5 次，准备好后按 Enter ...")
     input("[-] Getting time 5 times, press enter when ready ...")
     while counter != 4:
         print(pcf.datetime())
@@ -125,11 +131,13 @@ def test_bh1750():
     sensor = bh1750.BH1750()
     # initialize counter
     counter = 0
-    input("[-] Testing BH1750 sensor 5 times, press enter when ready ...")
+    print("[-] 测试 BH1750 传感器 5 次，准备就绪后按 Enter ...")
+    input("[-] Testing BH1750 sensor 5 times, Press Enter when ready ...")
     print("")
     while counter != 4:
         # get light value
         value = sensor.readLight()
+        print("[-] 房间内的灯光: %slx" % value)
         print("[-] Light in the room: %slx" % value)
         # sleep one second
         time.sleep(1)
@@ -143,7 +151,8 @@ def test_bme280():
     sensor = bme280.BME280(i2c=i2c)
     # setup counter
     counter = 0
-    input("[-] Reading BME280 values 5 times, press enter when ready ...")
+    print("[-] 读取 BME280 值 5 次，准备好后按 Enter ...")
+    input("[-] Reading BME280 values 5 times, Press Enter when ready ...")
     print("")
     while counter != 4:
         # get the values from the BME280 library
@@ -160,6 +169,14 @@ def test_bme280():
         print("Dew point: %s" % dew_point)
         print("Sea level: %s" % sea_level)
         print("------------------------")
+        print("------------------------")
+        print("温度: %s" % values[0])
+        print("湿度: %s" % values[1])
+        print("压力: %s" % values[2])
+        print("高度: %s" % altitude)
+        print("露点: %s" % dew_point)
+        print("海平面: %s" % sea_level)
+        print("------------------------")
         print("")
         time.sleep(1)
         counter = counter + 1
@@ -167,16 +184,19 @@ def test_bme280():
     print("")
 
 def test_pump():
-    input("[-] Turn on/off the pump 3 times, press enter when ready ...")
+    print("[-] 打开/关闭泵 3 次，准备好后按 Enter ...")
+    input("[-] Turn on/off the pump 3 times, Press Enter when ready ...")
     print("")
     counter = 0
     while counter != 3:
         # turn on the pump
+        print("[-] 泵开启")
         print("[-] Pump ON")
         pump.value(1)
         # wait one second
         time.sleep(1)
         # turn off the pump
+        print("[-] 关闭泵")
         print("[-] Pump OFF")
         pump.value(0)
         # wait one second
@@ -190,11 +210,13 @@ def read_water_level():
     # set counter
     counter = 1
     # read water level values
-    input("[-] Reading water sensor values 5 times, press enter when ready ...")
+    print("[-] 读取水传感器值 5 次，准备就绪后按 Enter ...")
+    input("[-] Reading water sensor values 5 times, Press Enter when ready ...")
     print("")
     while counter != 5:
         # will return 0 if container have no water and 1 if it has water
         value = water_level.value()
+        print("[-] 水位: %s" % value)
         print("[-] Water level: %s" % value)
         time.sleep(1)
         # update counter
@@ -203,6 +225,7 @@ def read_water_level():
     print("")
 
 def test_rgb():
+    print("[-] 测试 RGB LED，准备就绪后按 Enter ...")
     input("[-] Testing RGB LED, press enter when ready ...")
     print("")
     print("[-] Setting RGB Red")
@@ -231,11 +254,13 @@ def read_soil_moisture():
     # set counter
     counter = 1
     # read soil moisture values
+    print("[-] 读取土壤湿度值 5 次，准备好后按 Enter ...")
     input("[-] Reading soli moisture values 5 times, press enter when ready ...")
     print("")
     while counter != 5:
         # get sensor value
         value = adc.read()
+        print("[-] 土壤湿度: %s" % value)
         print("[-] Soil moisture: %s" % value)
         time.sleep(1)
         # update counter
@@ -267,6 +292,7 @@ def main():
     # test DHT11
     #test_dht11()
     # finally, go to deep sleep and test waking up
+    print('[-] 现在要睡觉了..叫醒我测试.')
     print('[-] Going to sleep now .. wake me up to test.')
     machine.deepsleep()
 
