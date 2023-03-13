@@ -22,7 +22,7 @@ SOFTWARE.
 """
 import machine
 from machine import I2C,ADC,Pin
-from eduponics import bme280,at24c02,ds1307,bh1750,pcf8563,qmp6988,sht30
+from Eduponics import bme280,at24c02,ds1307,bh1750,pcf8563,qmp6988,sht30
 import neopixel
 import time
 import esp32
