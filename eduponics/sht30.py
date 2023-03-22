@@ -36,11 +36,14 @@ class SHT30():
     ENABLE_HEATER_CMD = b'\x30\x6D'
     DISABLE_HEATER_CMD = b'\x30\x66'
 
-    def __init__(self, scl_pin=5, sda_pin=4, delta_temp = 0, delta_hum = 0, i2c_address=DEFAULT_I2C_ADDRESS):
-        self.i2c = I2C(scl=Pin(scl_pin), sda=Pin(sda_pin))
-        self.i2c_addr = i2c_address
-        self.set_delta(delta_temp, delta_hum)
-        time.sleep_ms(50)
+    def __init__(self, scl_pin=5, sda_pin=4, delta_temp = 0, delta_hum = 0, i2c_address=DEFAULT_I2C_ADDRESS, i2c=None):
+        if(i2c != None):
+            self.i2c = i2c
+        else:
+            self.i2c = I2C(scl=Pin(scl_pin), sda=Pin(sda_pin))
+            self.i2c_addr = i2c_address
+            self.set_delta(delta_temp, delta_hum)
+            time.sleep_ms(50)
     
     def init(self, scl_pin=5, sda_pin=4):
         """
