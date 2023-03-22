@@ -190,9 +190,3 @@ class SHT30Error(Exception):
             return "CRC error"
         else:
             return "Unknown error"
-
-if __name__ == "__main__":
-
-    sensor = SHT30()
-    temperature, humidity = sensor.measure()
-    print('Temperature:', temperature, 'ºC, RH:', humidity, '%')
