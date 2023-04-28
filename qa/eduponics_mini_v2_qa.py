@@ -3,7 +3,6 @@ MicroPython QA file to test all the sensors on the Eduponics Mini
 https://github.com/STEMinds/micropython-eduponics
 MIT License
 Copyright (c) 2022 STEMinds
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -49,14 +48,20 @@ pump = Pin(23, Pin.OUT)
 i2c = I2C(scl=Pin(15), sda=Pin(4))
 
 def test_qmp6988():
+    print("[-] 读取 QMP6988 大气压力传感器...按 ENTER")
+    input("[-] Reading QMP6988 Barometric pressure sensor...")
     qmp = qmp6988.QMP6988(i2c)
     temp, pressure = qmp.measure()
     print("Temp/Pressure: {}°C/{}Pa".format(temp, pressure))
-
+    print("")
+    
 def test_sht30():
+    print("[-] 读取 SHT30 温湿度传感器...按 ENTER")
+    input("[-] Reading SHT30 Temperature and humidity sensor...")
     sensor = sht30.SHT30(i2c=i2c)
     temperature, humidity = sensor.measure()
     print('Temperature:', temperature, 'ºC, RH:', humidity, '%')
+    print("")
     
 def test_eeprom():
     print("[-] 测试 EEPROM ... 准备就绪后按 Enter ...")
