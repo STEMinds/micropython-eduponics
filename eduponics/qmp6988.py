@@ -1,4 +1,5 @@
 # Copyright (c) 2022 Sebastian Wicki
+# Last modified: 26/07/2023 by STEMinds
 # SPDX-License-Identifier: MIT
 """
 I2C-based driver for the QMP6988 temperature and pressure sensor.
