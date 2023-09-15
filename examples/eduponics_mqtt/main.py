@@ -2,7 +2,7 @@
 MicroPython MQTT Eduponics APP Client
 https://github.com/STEMinds/micropython-eduponics
 MIT License
-Copyright (c) 2020 STEMinds
+Copyright (c) 2023 STEMinds
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
