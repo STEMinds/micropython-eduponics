@@ -22,7 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from machine import I2C,Pin
+from machine import Pin
+from machine import SoftI2C as I2C
 from Eduponics import bme280
 from utime import sleep
 
