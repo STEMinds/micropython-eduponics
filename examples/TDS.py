@@ -23,7 +23,8 @@ SOFTWARE.
 """
 
 from Eduponics import ads1x15,tds
-from machine import I2C, Pin
+from machine import Pin
+from machine import SoftI2C as I2C
 import time
 
 # IO12 reserved for powering the board, define it
