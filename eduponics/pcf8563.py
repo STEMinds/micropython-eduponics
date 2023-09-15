@@ -22,7 +22,7 @@ github:https://github.com/lewisxhe/PCF8563_PythonLibrary
 '''
 
 import utime
-from machine import I2C
+from machine import SoftI2C as I2C
 
 PCF8563_SLAVE_ADDRESS = const(0x51)
 PCF8563_STAT1_REG = const(0x00)
