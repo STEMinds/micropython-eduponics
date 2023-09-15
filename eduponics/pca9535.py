@@ -10,8 +10,8 @@ Date:05/12/2022
 Based on datasheet: https://www.nxp.com/docs/en/data-sheet/PCA9555.pdf
 """
 
-
-from machine import I2C, Pin
+from machine import Pin
+from machine import SoftI2C as I2C
 import time
 
 InputPort0 = 0x00
@@ -101,7 +101,6 @@ class PCA9555:
                 vals+=self.pinValues[i+8]<<i
             vals=int(hex(vals),0)
             self.i2c.writeto_mem(self.address,OutputPort1,bytes([vals]))
-        print(vals)
 
 
     def readPin(self, pin):
@@ -177,4 +176,3 @@ class Relays():
         self.pca.writePin(9,0)
         self.pca.writePin(10,0)
         self.pca.writePin(11,0)
-
