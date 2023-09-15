@@ -1,4 +1,5 @@
-from machine import I2C, Pin
+from machine import Pin
+from machine import SoftI2C as I2C
 import time
 
 __version__ = '0.2.1'
