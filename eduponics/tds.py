@@ -26,7 +26,8 @@ THE SOFTWARE.
 import time
 from Eduponics import ads1x15
 from ulab import array,numerical
-from machine import I2C, Pin
+from machine import Pin
+from machine import SoftI2C as I2C
 import time
 
 class TDS():
