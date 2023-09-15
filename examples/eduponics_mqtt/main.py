@@ -37,7 +37,7 @@ light_sensor = bh1750.BH1750()
 
 # Configure BME280
 # setup I2C connection
-i2c = machine.I2C(scl=machine.Pin(15), sda=machine.Pin(4))
+i2c = machine.SoftI2C(scl=machine.Pin(15), sda=machine.Pin(4))
 # Initialize BME280 object with default address 0x76
 bme_sensor = bme280.BME280(i2c=i2c)
 # initialize dht object, DHT11 coonected to IO19
