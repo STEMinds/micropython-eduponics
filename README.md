@@ -116,7 +116,7 @@ Copyright (c) 2014 Adafruit Industries,
               2016 Peter Dahlebrg,
               2017 Robert Hammelrath (@robert-hh),
               2019 Mike Causer (@mcauser),
-              2021 STEMinds (@STEMinds),
+              2021-2023 STEMinds (@STEMinds),
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
