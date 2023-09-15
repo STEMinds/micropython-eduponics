@@ -1,7 +1,8 @@
 import utime
 import time
 import pcf8563
-from machine import I2C,Pin
+from machine import Pin
+from machine import SoftI2C as I2C
 
 def handle_interrupt(pin):
     if r.check_for_alarm_interrupt():
