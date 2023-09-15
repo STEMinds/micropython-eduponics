@@ -20,7 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 import machine
-from machine import I2C,ADC,Pin
+from machine import ADC,Pin
+from machine import SoftI2C as I2C
 from Eduponics import bme280,at24c02,ds1307,bh1750,pcf8563,qmp6988,sht30
 import neopixel
 import time
